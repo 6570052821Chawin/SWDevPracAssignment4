@@ -1,19 +1,19 @@
 exports.getHospitals = (req, res, next) => {
-    res.status(200).json({success: true, msg: 'Show all hospitals'})
-}
+    res.status(200).json({success: true, msg: 'Show all hospitals'});
+};
 
 exports.getHospital = (req, res, next) => {
-    res.status(200).json({success: true, msg: `Show hospitals ${req.params.id}`})
-}
+    res.status(200).json({success: true, msg: `Show hospitals ${req.params.id}`});
+};
 
 exports.createHospital = (req, res, next) => {
-    res.status(200).json({success: true, msg: 'Create new hospital'})
-}
+    res.status(200).json({success: true, msg: 'Create new hospital'});
+};
 
 exports.updateHospital = (req, res, next) => {
-    res.status(200).json({success: true, msg: `Update hospitals ${req.params.id}`})
-}
+    res.status(200).json({success: true, msg: `Update hospitals ${req.params.id}`});
+};
 
 exports.deleteHospital = (req, res, next) => {
-    res.status(200).json({success: true, msg: `Delete hospitals ${req.params.id}`})
-}
+    res.status(200).json({success: true, msg: `Delete hospitals ${req.params.id}`});
+};
