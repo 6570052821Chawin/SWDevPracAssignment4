@@ -2,7 +2,11 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser')
 const connectDB = require('./config/db');
+const cors = require('cors');
 const app = express();
+app.use(cors())
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet=require('helmet');
 
 //Load env vars
 dotenv.config({path:'./config/config.env'});
@@ -24,6 +28,13 @@ app.use('/api/v1/appointments', appointments)
 //Cookie parser
 app.use(cookieParser());
 
+//Sanitize data
+app.use(mongoSanitize());
+
+//Set security headers
+app.use(helmet());
+
+
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, console.log('Server running in ', process.env.NODE_ENV, ' mode on port ', PORT));
@@ -34,3 +45,4 @@ process.on('unhandledRejection', (err, promise) => {
     //Close server & exit process
     server.close(() => process.exit(1));
 })
+

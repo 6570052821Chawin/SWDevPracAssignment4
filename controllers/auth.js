@@ -79,8 +79,13 @@ const sendTokenResponse = (user, statusCode, res) => {
     if (process.env.NODE_ENV == 'production'){
         options.secure = true;
     }
-    res.status(statusCode).cookie('token', token, options).json({
+    res.status(statusCode)/*.cookie('token', token, options)*/.json({
         success: true,
+        //add for frontend
+        _id:user._id,
+        name: user.name,
+        email:user.email,
+        //end for frontend
         token
     })
 }
@@ -97,3 +102,20 @@ exports.getMe = async (req, res, next) => {
         data: user
     });
 }
+
+
+//@desc Log user out / clear cookie 
+//@route GET /api/v1/auth/logout
+//@access Private
+
+exports.logout = async(req,res,next)=>{
+    res.cookie('token','none',{
+        expires: new Date(Date.now()+ 10*1000),
+        httpOnly:true
+    });
+
+    res.status(200).json({
+        success:true,
+        data:{}
+    });
+};
